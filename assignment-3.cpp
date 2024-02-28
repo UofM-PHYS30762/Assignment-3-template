@@ -55,7 +55,7 @@ int main()
 {
 
   // Create the following particles: 
-  // two electrons, four muons, three taus, one antielectron, one antimuon, one antitau 
+  // two electrons, four muons, one antielectron, one antimuon
   // Use the parameterised constructor
 
   // Print out the data from all the particles (put them in a vector)
