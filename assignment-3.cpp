@@ -34,9 +34,6 @@ public:
 
 };
 
-// Implementation of print_data function goes here
-
-// End of particle class and associated member functions
 
 // Beginning of detector class
 
@@ -50,6 +47,54 @@ public:
 
 // End of detector class
 
+class Lepton {
+private:
+    std::string particle_type; // "electron" or "muon"
+    int rest_mass; // in MeV
+    int charge; // +1 for particles, -1 for antiparticles
+    double velocity; // in m/s
+    double beta; // velocity/speed_of_light
+    const double light_speed = 2.99792458e8; // speed of light
+
+public:
+    // Constructors
+    Lepton() = default; 
+    Lepton(std::string type, int mass, int particle_charge, double vel) 
+        : particle_type(type), rest_mass(mass), charge(particle_charge), velocity(vel) {
+            set_velocity(vel); 
+        }
+    // Destructor
+    ~Lepton(){};
+
+    // Setters
+    void set_particle_type(const std::string& type) { particle_type = type; }
+    void set_rest_mass(int mass) { rest_mass = mass; }
+    void set_charge(int particle_charge) { charge = particle_charge; }
+    void set_velocity(double vel) { 
+        velocity = (vel >= 0 && vel <= light_speed) ? vel : 0;
+        beta = velocity / light_speed;
+    }
+
+    // Getters
+    std::string get_particle_type() const { return particle_type; }
+    int get_rest_mass() const { return rest_mass; }
+    int get_charge() const { return charge; }
+    double get_velocity() const { return velocity; }
+    double get_beta() const { return beta; }
+
+    // Member functions
+    void print_data(const Lepton &l)
+    {
+      std::cout.precision(3);
+      std::cout << "Lepton [type, mass, charge, velocity, beta] : " << get_particle_type() << ","
+      << l.get_rest_mass() << "," << get_charge() << "," << get_velocity() << "," << get_beta() << "," << std::endl;
+       
+    }
+};
+
+//const double Lepton::light_speed = 2.99792458e8;
+
+
 // Main program
 int main()
 {
@@ -57,6 +102,11 @@ int main()
   // Create the following particles: 
   // two electrons, four muons, one antielectron, one antimuon
   // Use the parameterised constructor
+
+
+  // Testing Lepton class functionality
+  Lepton electron("electron", 0.511, -1, 2.0e8); // Example values
+  electron.print_data(electron);
 
   // Print out the data from all the particles (put them in a vector)
 
